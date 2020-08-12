@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class MyForm extends StatefulWidget {
   @override
   _MyFormState createState() => _MyFormState();
 }
+
 GlobalKey myFormKey = new GlobalKey();
 
 class _MyFormState extends State<MyForm> {
@@ -40,26 +40,25 @@ class _MyFormState extends State<MyForm> {
         child: Form(
           key: myFormKey,
           child: Column(
-            children: [SafeArea(
-              child: DateRangeField(
-                  context: context,
-                  initialValue: DateTimeRange(start: DateTime.now(), end: DateTime.now()),
-                  validator: (value) {
-                    if (value.start.isBefore(DateTime.now())){
-                      return 'Please enter a valid date';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    myDateRange = value;
-                    print(myDateRange);
-                  }
+            children: [
+              SafeArea(
+                child: DateRangeField(
+                    context: context,
+                    initialValue: DateTimeRange(
+                        start: DateTime.now(), end: DateTime.now()),
+                    validator: (value) {
+                      if (value.start.isBefore(DateTime.now())) {
+                        return 'Please enter a valid date';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      myDateRange = value;
+                      print(myDateRange);
+                    }),
               ),
-            ),
               FlatButton(
-                child: Text(
-                    'Submit'
-                ),
+                child: Text('Submit'),
                 onPressed: _submitForm,
               )
             ],
