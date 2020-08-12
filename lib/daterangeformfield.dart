@@ -10,6 +10,7 @@ class DateRangeField extends FormField<DateTimeRange> {
       FormFieldValidator<DateTimeRange> validator,
       @required DateTimeRange initialValue,
       bool autoValidate = false,
+      DateFormat dateFormat,
       InputDecoration decoration = const InputDecoration()})
       : assert(initialValue != null),
         assert(context != null),
@@ -19,6 +20,8 @@ class DateRangeField extends FormField<DateTimeRange> {
             onSaved: onSaved,
             initialValue: initialValue,
             builder: (FormFieldState<DateTimeRange> state) {
+              final DateFormat format =
+                  (dateFormat ?? DateFormat('MM-dd-yyyy'));
               final InputDecoration inputDecoration = (decoration ??
                       const InputDecoration())
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
@@ -41,7 +44,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                 child: ListTile(
                     leading: Icon(Icons.date_range),
                     title: Text(
-                        'From ${DateFormat('yyyy-MM-dd').format(state.value.start)} to ${DateFormat('yyyy-MM-dd').format(state.value.end)}'),
+                        'From ${format.format(state.value.start)} to ${format.format(state.value.end)}'),
                     onTap: () {
                       selectDateRange(context);
                     }),
