@@ -1,4 +1,4 @@
-import 'package:daterangeformfield/main.dart';
+import 'package:date_range_form_field/daterangeformfield.dart';
 
 import 'package:flutter/material.dart';
 
