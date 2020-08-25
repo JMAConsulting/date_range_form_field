@@ -5,6 +5,9 @@ The widget will accept InputDecoration or use the default from the app's theme.
 Additionally, the widget will accept a date format, defaulting to MM-dd-yyyy.
 
 # Example
+
+<img src="https://user-images.githubusercontent.com/65566908/91237186-f0440b80-e707-11ea-919f-846d0c6504c4.gif" height="500"/>
+
 ``` dart
 // Import package
 import 'package:flutter/material.dart';
@@ -86,5 +89,3 @@ class _MyFormFieldState extends State<MyFormField> {
   }
 }
 ```
-
-<img src="https://user-images.githubusercontent.com/65566908/91237186-f0440b80-e707-11ea-919f-846d0c6504c4.gif" height="500"/>
