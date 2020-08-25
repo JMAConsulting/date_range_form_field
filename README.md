@@ -87,4 +87,4 @@ class _MyFormFieldState extends State<MyFormField> {
 }
 ```
 
-![example_video](https://user-images.githubusercontent.com/65566908/91237186-f0440b80-e707-11ea-919f-846d0c6504c4.gif)
+![example_video](https://user-images.githubusercontent.com/65566908/91237186-f0440b80-e707-11ea-919f-846d0c6504c4.gif | height=300)
