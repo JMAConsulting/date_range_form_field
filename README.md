@@ -4,7 +4,16 @@ A Flutter package for adding a DateRange widget into a form.
 The widget will accept InputDecoration or use the default from the app's theme.
 Additionally, the widget will accept a date format, defaulting to MM-dd-yyyy.
 
+# Usage
+
+This widget should be used like any other FormField within a form.
+It is important to note that the firstDate and lastDate properties correspond to the first and last valid dates.
+This widget must have a MaterialWidget ancestor, such as a MaterialApp
+
 # Example
+
+<img src="https://user-images.githubusercontent.com/65566908/91237186-f0440b80-e707-11ea-919f-846d0c6504c4.gif" height="500"/>
+
 ``` dart
 // Import package
 import 'package:flutter/material.dart';
@@ -86,5 +95,3 @@ class _MyFormFieldState extends State<MyFormField> {
   }
 }
 ```
-
-![](https://user-images.githubusercontent.com/65566908/91220023-8d437c00-e6e9-11ea-8e18-f2c0d0fb1752.png)
