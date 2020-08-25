@@ -1,14 +1,90 @@
 # date_range_form_field
 
-A Flutter package to create DateRange FormFields
+A Flutter package for adding a DateRange widget into a form. 
+The widget will accept InputDecoration or use the default from the app's theme.
+Additionally, the widget will accept a date format, defaulting to MM-dd-yyyy.
 
-## Getting Started
+# Example
+``` dart
+// Import package
+import 'package:flutter/material.dart';
+import 'package:date_range_form_field/date_range_form_field.dart';
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+void main() {
+  runApp(new MyApp());
+}
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      home: MyFormField(),
+    );
+  }
+}
+
+// Make a form
+class MyFormField extends StatefulWidget {
+  @override
+  _MyFormFieldState createState() => _MyFormFieldState();
+}
+
+GlobalKey myFormKey = new GlobalKey();
+
+class _MyFormFieldState extends State<MyFormField> {
+  DateTimeRange myDateRange;
+
+  void _submitForm() {
+    final FormState form = myFormKey.currentState;
+    form.save();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Date Range Form Example"),
+      ),
+      body: SafeArea(
+        child: Form(
+          key: myFormKey,
+          child: Column(
+            children: [
+              SafeArea(
+                child: DateRangeField(
+                    context: context,
+                    decoration: InputDecoration(
+                      labelText: 'Date Range',
+                      prefixIcon: Icon(Icons.date_range),
+                      hintText: 'Please select a start and end date',
+                      border: OutlineInputBorder(),
+                    ),
+                    initialValue: DateTimeRange(
+                        start: DateTime.now(), end: DateTime.now()),
+                    validator: (value) {
+                      if (value.start.isBefore(DateTime.now())) {
+                        return 'Please enter a valid date';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      setState(() {
+                        myDateRange = value;
+                      });
+                    }),
+              ),
+              FlatButton(
+                child: Text('Submit'),
+                onPressed: _submitForm,
+              ),
+              if(myDateRange != null) Text("Saved value is: ${myDateRange.toString()}")
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+![](https://user-images.githubusercontent.com/65566908/91220023-8d437c00-e6e9-11ea-8e18-f2c0d0fb1752.png)
