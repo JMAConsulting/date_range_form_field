@@ -2,7 +2,7 @@ name: date_range_form_field
 description: A Flutter package to create DateRange FormFields
 version: 0.0.1
 author: Calum Murray <calum.murray@jmaconsulting.biz>, JMA Consulting
-homepage:
+homepage: https://github.com/JMAConsulting/date_range_form_field
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

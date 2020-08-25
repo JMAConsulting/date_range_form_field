@@ -6,6 +6,9 @@ class DateRangeField extends FormField<DateTimeRange> {
   DateRangeField(
       {Key key,
       @required BuildContext context,
+      double width,
+      EdgeInsets margin,
+      FocusNode focusNode,
       FormFieldSetter<DateTimeRange> onSaved,
       FormFieldValidator<DateTimeRange> validator,
       @required DateTimeRange initialValue,
@@ -38,16 +41,19 @@ class DateRangeField extends FormField<DateTimeRange> {
                 }
               }
 
-              return InputDecorator(
-                decoration:
-                    inputDecoration.copyWith(errorText: state.errorText),
-                child: ListTile(
-                    leading: Icon(Icons.date_range),
-                    title: Text(
-                        'From ${format.format(state.value.start)} to ${format.format(state.value.end)}'),
-                    onTap: () {
-                      selectDateRange(context);
-                    }),
+              return InkWell(
+                onTap: () {
+                  selectDateRange(context);
+                },
+                child: Container(
+                    margin: margin ?? EdgeInsets.all(15.0),
+                    width: width ?? MediaQuery.of(context).size.width,
+                    child: InputDecorator(
+                      decoration:
+                          inputDecoration.copyWith(errorText: state.errorText),
+                      child: Text(
+                          '${format.format(state.value.start)} - ${format.format(state.value.end)}'),
+                    )),
               );
             });
 }

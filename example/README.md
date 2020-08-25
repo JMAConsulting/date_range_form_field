@@ -1,6 +1,14 @@
-import 'package:date_range_form_field/daterangeformfield.dart';
+# DateRangeFormField
 
+A Flutter package for adding a DateRange widget into a form. 
+The widget will accept InputDecoration or use the default from the app's theme.
+Additionally, the widget will accept a date format, defaulting to MM-dd-yyyy.
+
+# Example
+``` dart
+// Import package
 import 'package:flutter/material.dart';
+import 'package:date_range_form_field/date_range_form_field.dart';
 
 void main() {
   runApp(new MyApp());
@@ -10,19 +18,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      home: MyForm(),
+      home: MyFormField(),
     );
   }
 }
 
-class MyForm extends StatefulWidget {
+// Make a form
+class MyFormField extends StatefulWidget {
   @override
-  _MyFormState createState() => _MyFormState();
+  _MyFormFieldState createState() => _MyFormFieldState();
 }
 
 GlobalKey myFormKey = new GlobalKey();
 
-class _MyFormState extends State<MyForm> {
+class _MyFormFieldState extends State<MyFormField> {
   DateTimeRange myDateRange;
 
   void _submitForm() {
@@ -44,6 +53,12 @@ class _MyFormState extends State<MyForm> {
               SafeArea(
                 child: DateRangeField(
                     context: context,
+                    decoration: InputDecoration(
+                      labelText: 'Date Range',
+                      prefixIcon: Icon(Icons.date_range),
+                      hintText: 'Please select a start and end date',
+                      border: OutlineInputBorder(),
+                    ),
                     initialValue: DateTimeRange(
                         start: DateTime.now(), end: DateTime.now()),
                     validator: (value) {
@@ -53,14 +68,16 @@ class _MyFormState extends State<MyForm> {
                       return null;
                     },
                     onSaved: (value) {
-                      myDateRange = value;
-                      print(myDateRange);
+                      setState(() {
+                        myDateRange = value;
+                      });
                     }),
               ),
               FlatButton(
                 child: Text('Submit'),
                 onPressed: _submitForm,
-              )
+              ),
+              if(myDateRange != null) Text("Saved value is: ${myDateRange.toString()}")
             ],
           ),
         ),
@@ -68,3 +85,6 @@ class _MyFormState extends State<MyForm> {
     );
   }
 }
+```
+
+![](https://user-images.githubusercontent.com/65566908/91220023-8d437c00-e6e9-11ea-8e18-f2c0d0fb1752.png)
