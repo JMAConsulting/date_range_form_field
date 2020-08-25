@@ -6,6 +6,19 @@ class DateRangeField extends FormField<DateTimeRange> {
   DateRangeField(
       {Key key,
       @required BuildContext context,
+      DateTime firstDate,
+      DateTime lastDate,
+      DateTime currentDate,
+      DatePickerEntryMode initialEntryMode,
+      String helpText,
+      String cancelText,
+      String confirmText,
+      String saveText,
+      String errorFormatText,
+      String errorInvalidText,
+      String errorInvalidRangeText,
+      String fieldStartLabelText,
+      String fieldEndLabelText,
       double width,
       EdgeInsets margin,
       FocusNode focusNode,
@@ -15,8 +28,7 @@ class DateRangeField extends FormField<DateTimeRange> {
       bool autoValidate = false,
       DateFormat dateFormat,
       InputDecoration decoration = const InputDecoration()})
-      : assert(initialValue != null),
-        assert(context != null),
+      : assert(context != null),
         assert(autoValidate != null),
         super(
             validator: validator,
@@ -30,12 +42,19 @@ class DateRangeField extends FormField<DateTimeRange> {
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
               Future<Null> selectDateRange(BuildContext context) async {
                 DateTimeRange picked = await showDateRangePicker(
-                  context: context,
-                  initialDateRange: initialValue,
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime(DateTime.now().year + 5),
-                  helpText: 'Select Date Range',
-                );
+                    context: context,
+                    initialDateRange: initialValue,
+                    firstDate: firstDate ?? DateTime.now(),
+                    lastDate: lastDate ?? DateTime(DateTime.now().year + 5),
+                    helpText: helpText ?? 'Select Date Range',
+                    cancelText: cancelText ?? 'CANCEL',
+                    confirmText: confirmText ?? 'OK',
+                    errorFormatText: errorFormatText ?? 'Invalid format.',
+                    errorInvalidText: errorInvalidText ?? 'Out of range.',
+                    errorInvalidRangeText:
+                        errorInvalidRangeText ?? 'Invalid range.',
+                    fieldStartHintText: fieldStartLabelText ?? 'Start Date',
+                    fieldEndLabelText: fieldEndLabelText ?? 'End Date');
                 if (picked != null) {
                   state.didChange(picked);
                 }

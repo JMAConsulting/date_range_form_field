@@ -50,7 +50,9 @@ class _MyFormFieldState extends State<MyFormField> {
                       border: OutlineInputBorder(),
                     ),
                     initialValue: DateTimeRange(
-                        start: DateTime.now(), end: DateTime.now()),
+                      start: DateTime.now(),
+                      end: DateTime.now(),
+                    ),
                     validator: (value) {
                       if (value.start.isBefore(DateTime.now())) {
                         return 'Please enter a valid date';
