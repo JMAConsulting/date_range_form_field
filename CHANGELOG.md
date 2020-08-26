@@ -5,3 +5,7 @@
 ## 0.0.2
 
 * Added dartdoc documentation, updated description.
+
+## 0.0.3
+
+* Reformatted dartdoc documentation.
