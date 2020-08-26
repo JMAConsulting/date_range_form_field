@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 
-/// A [DateRangeField] wrapped in a [FormField].
+/// A [DateRangeField] which extends a [FormField].
 ///
 /// The use of a [Form] ancestor is not required, however it makes it easier to
 /// save, reset, and validate multiple fields at the same time. In order to use
@@ -15,7 +15,13 @@ import 'package:intl/intl.dart';
 ///
 /// To style this widget, pass an [InputDecoration] to the constructor. If not,
 /// the [DateRangeField] will use the default from the [Theme].
+///
+/// This widget must have a [Material] ancestor, such as a [MaterialApp] or [Form].
 class DateRangeField extends FormField<DateTimeRange> {
+
+  /// Creates a [DateRangeField] which extends a [FormField].
+  ///
+  /// When using without a [Form] ancestor a [GlobalKey] is required.
   DateRangeField(
       {Key key,
       @required BuildContext context,
