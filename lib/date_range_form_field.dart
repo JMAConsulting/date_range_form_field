@@ -52,7 +52,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                     errorFormatText: errorFormatText ?? 'Invalid format.',
                     errorInvalidText: errorInvalidText ?? 'Out of range.',
                     errorInvalidRangeText:
-                        errorInvalidRangeText ?? 'Invalid range.',
+                    errorInvalidRangeText ?? 'Invalid range.',
                     fieldStartHintText: fieldStartLabelText ?? 'Start Date',
                     fieldEndLabelText: fieldEndLabelText ?? 'End Date');
                 if (picked != null) {
