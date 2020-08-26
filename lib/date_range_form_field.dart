@@ -18,7 +18,6 @@ import 'package:intl/intl.dart';
 ///
 /// This widget must have a [Material] ancestor, such as a [MaterialApp] or [Form].
 class DateRangeField extends FormField<DateTimeRange> {
-
   /// Creates a [DateRangeField] which extends a [FormField].
   ///
   /// When using without a [Form] ancestor a [GlobalKey] is required.
