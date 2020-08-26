@@ -1,5 +1,5 @@
 name: date_range_form_field
-description: A Flutter package to create a DateRange FormField widget. The widget enables users to enter a date range that is saved into a DateTimeRange object, and supports InputDecoration and DateFormat properties.
+description: A Flutter package to create a widget which allows the user to input a DateRange into a FormField.
 version: 0.0.1
 homepage: https://github.com/JMAConsulting/date_range_form_field
 

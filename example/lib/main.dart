@@ -55,7 +55,7 @@ class _MyFormFieldState extends State<MyFormField> {
                     ),
                     validator: (value) {
                       if (value.start.isBefore(DateTime.now())) {
-                        return 'Please enter a valid date';
+                        return 'Please enter a later start date';
                       }
                       return null;
                     },
