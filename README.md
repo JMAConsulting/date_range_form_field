@@ -1,6 +1,7 @@
 # date_range_form_field
 
-A Flutter package for adding a DateRange widget into a form. 
+A Flutter package for adding a DateRange widget into a form.
+A date picker UX is provided by showDateRangePicker. 
 The widget will accept InputDecoration or use the default from the app's theme.
 Additionally, the widget will accept a date format, defaulting to MM-dd-yyyy.
 
@@ -95,3 +96,8 @@ class _MyFormFieldState extends State<MyFormField> {
   }
 }
 ```
+
+# Contributing
+
+Contributions are welcome as pull requests to the github repo.
+Please open issues on the repo for feature requests or bug reports.
