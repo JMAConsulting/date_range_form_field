@@ -9,3 +9,7 @@
 ## 0.0.3
 
 * Reformatted dartdoc documentation.
+
+## 0.0.4
+
+* Added 'date picker' text to description of package, and Contributing section to README.md.
