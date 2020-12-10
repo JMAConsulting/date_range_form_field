@@ -77,6 +77,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                     fieldEndLabelText: fieldEndLabelText ?? 'End Date');
                 if (picked != null) {
                   state.didChange(picked);
+                  state.save();
                 }
               }
 
