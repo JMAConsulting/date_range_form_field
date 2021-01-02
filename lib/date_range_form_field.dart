@@ -41,7 +41,7 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.margin,
       FormFieldSetter<DateTimeRange> onSaved,
       FormFieldValidator<DateTimeRange> validator,
-      @required this.initialValue,
+      this.initialValue,
       bool autoValidate = false,
       this.dateFormat,
       InputDecoration decoration = const InputDecoration()})
@@ -92,7 +92,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                     child: InputDecorator(
                       decoration:
                           inputDecoration.copyWith(errorText: state.errorText),
-                      child: Text(
+                      child: Text(state.value == null ? '' :
 
                           /// This displays the selected date range when the dialog is closed.
                           '${format.format(state.value.start)} - ${format.format(state.value.end)}'),
