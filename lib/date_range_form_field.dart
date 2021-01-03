@@ -98,7 +98,8 @@ class DateRangeField extends FormField<DateTimeRange> {
                       child: Text(state.value == null ? '' :
 
                           /// This displays the selected date range when the dialog is closed.
-                          '${format.format(state.value.start)} - ${format.format(state.value.end)}'),
+                          '${format.format(state.value.start)} - ${format.format(state.value.end)}',
+                          style: TextStyle(color: enabled ? null : Theme.of(context).disabledColor)),
                     )),
               );
             });
