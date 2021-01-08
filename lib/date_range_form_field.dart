@@ -30,6 +30,7 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.initialEntryMode,
       this.helpText,
       this.cancelText,
+      this.enabled = true,
       this.confirmText,
       this.saveText,
       this.errorFormatText,
@@ -41,21 +42,23 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.margin,
       FormFieldSetter<DateTimeRange> onSaved,
       FormFieldValidator<DateTimeRange> validator,
-      @required this.initialValue,
+      this.initialValue,
       bool autoValidate = false,
       this.dateFormat,
       InputDecoration decoration = const InputDecoration()})
       : assert(context != null),
         assert(autoValidate != null),
+        assert(enabled != null),
         super(
             validator: validator,
             onSaved: onSaved,
+            enabled: enabled,
             initialValue: initialValue,
             builder: (FormFieldState<DateTimeRange> state) {
               final DateFormat format =
                   (dateFormat ?? DateFormat('MM-dd-yyyy'));
               final InputDecoration inputDecoration = (decoration ??
-                      const InputDecoration())
+                      const InputDecoration()).copyWith(enabled: enabled)
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
 
               /// This is the dialog to select the date range.
@@ -83,19 +86,20 @@ class DateRangeField extends FormField<DateTimeRange> {
 
               return InkWell(
                 /// This calls the dialog to select the date range.
-                onTap: () {
+                onTap: enabled ? () {
                   selectDateRange(context);
-                },
+                } : null,
                 child: Container(
                     margin: margin ?? EdgeInsets.all(15.0),
                     width: width ?? MediaQuery.of(context).size.width,
                     child: InputDecorator(
                       decoration:
                           inputDecoration.copyWith(errorText: state.errorText),
-                      child: Text(
+                      child: Text(state.value == null ? '' :
 
                           /// This displays the selected date range when the dialog is closed.
-                          '${format.format(state.value.start)} - ${format.format(state.value.end)}'),
+                          '${format.format(state.value.start)} - ${format.format(state.value.end)}',
+                          style: TextStyle(color: enabled ? null : Theme.of(context).disabledColor)),
                     )),
               );
             });
@@ -130,6 +134,11 @@ class DateRangeField extends FormField<DateTimeRange> {
   ///
   /// If null, this defaults to 'CANCEL'.
   final String cancelText;
+
+  /// Whether input should be enabled.
+  ///
+  /// If null, this defaults to true.
+  final bool enabled;
 
   /// This is the label on the ok button for the text input mode.
   ///
