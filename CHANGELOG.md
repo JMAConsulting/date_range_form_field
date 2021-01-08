@@ -17,7 +17,3 @@
 ## 0.0.5
 
 *Merged Pull Request adding null initialDateRange, and an enabled option
-
-## 0.0.6
-
-*Updated API docs
