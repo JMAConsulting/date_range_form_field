@@ -43,16 +43,17 @@ class _MyFormFieldState extends State<MyFormField> {
               SafeArea(
                 child: DateRangeField(
                     context: context,
+                    enabled: false,
                     decoration: InputDecoration(
                       labelText: 'Date Range',
                       prefixIcon: Icon(Icons.date_range),
                       hintText: 'Please select a start and end date',
                       border: OutlineInputBorder(),
                     ),
-                    initialValue: DateTimeRange(
-                      start: DateTime.now(),
-                      end: DateTime.now(),
-                    ),
+                    // initialValue: DateTimeRange(
+                    //   start: DateTime.now(),
+                    //   end: DateTime.now(),
+                    // ),
                     validator: (value) {
                       if (value.start.isBefore(DateTime.now())) {
                         return 'Please enter a later start date';

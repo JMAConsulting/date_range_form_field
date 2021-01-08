@@ -58,7 +58,8 @@ class DateRangeField extends FormField<DateTimeRange> {
               final DateFormat format =
                   (dateFormat ?? DateFormat('MM-dd-yyyy'));
               final InputDecoration inputDecoration = (decoration ??
-                      const InputDecoration()).copyWith(enabled: enabled)
+                      const InputDecoration())
+                  .copyWith(enabled: enabled)
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
 
               /// This is the dialog to select the date range.
@@ -86,20 +87,28 @@ class DateRangeField extends FormField<DateTimeRange> {
 
               return InkWell(
                 /// This calls the dialog to select the date range.
-                onTap: enabled ? () {
-                  selectDateRange(context);
-                } : null,
+                onTap: enabled
+                    ? () {
+                        selectDateRange(context);
+                      }
+                    : null,
                 child: Container(
                     margin: margin ?? EdgeInsets.all(15.0),
                     width: width ?? MediaQuery.of(context).size.width,
                     child: InputDecorator(
                       decoration:
                           inputDecoration.copyWith(errorText: state.errorText),
-                      child: Text(state.value == null ? '' :
+                      child: Text(
+                          state.value == null
+                              ? ''
+                              :
 
-                          /// This displays the selected date range when the dialog is closed.
-                          '${format.format(state.value.start)} - ${format.format(state.value.end)}',
-                          style: TextStyle(color: enabled ? null : Theme.of(context).disabledColor)),
+                              /// This displays the selected date range when the dialog is closed.
+                              '${format.format(state.value.start)} - ${format.format(state.value.end)}',
+                          style: TextStyle(
+                              color: enabled
+                                  ? null
+                                  : Theme.of(context).disabledColor)),
                     )),
               );
             });
