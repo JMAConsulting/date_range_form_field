@@ -22,3 +22,6 @@
 
 * Migrated package to null safety, made small change to the default date format.
 
+## 1.0.0-nullsafety.2
+
+* Updated example to include null safe code.

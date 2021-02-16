@@ -23,20 +23,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Make a form
 class MyFormField extends StatefulWidget {
   @override
   _MyFormFieldState createState() => _MyFormFieldState();
 }
 
-GlobalKey myFormKey = new GlobalKey();
+GlobalKey<FormState> myFormKey = new GlobalKey();
 
 class _MyFormFieldState extends State<MyFormField> {
-  DateTimeRange myDateRange;
+  DateTimeRange? myDateRange;
 
   void _submitForm() {
-    final FormState form = myFormKey.currentState;
-    form.save();
+    final FormState? form = myFormKey.currentState;
+    form!.save();
   }
 
   @override
@@ -53,31 +52,35 @@ class _MyFormFieldState extends State<MyFormField> {
               SafeArea(
                 child: DateRangeField(
                     context: context,
+                    enabled: true,
                     decoration: InputDecoration(
                       labelText: 'Date Range',
                       prefixIcon: Icon(Icons.date_range),
                       hintText: 'Please select a start and end date',
                       border: OutlineInputBorder(),
                     ),
-                    initialValue: DateTimeRange(
-                        start: DateTime.now(), end: DateTime.now()),
+                    // initialValue: DateTimeRange(
+                    //   start: DateTime.now(),
+                    //   end: DateTime.now(),
+                    // ),
                     validator: (value) {
-                      if (value.start.isBefore(DateTime.now())) {
-                        return 'Please enter a valid date';
+                      if (value!.start.isBefore(DateTime.now())) {
+                        return 'Please enter a later start date';
                       }
                       return null;
                     },
                     onSaved: (value) {
                       setState(() {
-                        myDateRange = value;
+                        myDateRange = value!;
                       });
                     }),
               ),
-              FlatButton(
+              ElevatedButton(
                 child: Text('Submit'),
                 onPressed: _submitForm,
               ),
-              if(myDateRange != null) Text("Saved value is: ${myDateRange.toString()}")
+              if (myDateRange != null)
+                Text("Saved value is: ${myDateRange.toString()}")
             ],
           ),
         ),
@@ -85,6 +88,7 @@ class _MyFormFieldState extends State<MyFormField> {
     );
   }
 }
+
 ```
 
 ![example_video](https://user-images.githubusercontent.com/65566908/91237186-f0440b80-e707-11ea-919f-846d0c6504c4.gif)
