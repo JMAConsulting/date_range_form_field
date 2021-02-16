@@ -1,4 +1,4 @@
-// Copyright 2020 JMA Consulting. All rights reserved.
+// Copyright 2020, 2021 JMA Consulting. All rights reserved.
 // Use of this source code is governed by a BSD-style license which can be
 // found in the LICENSE file.
 
@@ -21,9 +21,10 @@ class DateRangeField extends FormField<DateTimeRange> {
   /// Creates a [DateRangeField] which extends a [FormField].
   ///
   /// When using without a [Form] ancestor a [GlobalKey] is required.
+
   DateRangeField(
-      {Key key,
-      @required BuildContext context,
+      {Key? key,
+      required BuildContext context,
       this.firstDate,
       this.lastDate,
       this.currentDate,
@@ -40,48 +41,49 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.fieldEndLabelText,
       this.width,
       this.margin,
-      FormFieldSetter<DateTimeRange> onSaved,
-      FormFieldValidator<DateTimeRange> validator,
+      FormFieldSetter<DateTimeRange>? onSaved,
+      FormFieldValidator<DateTimeRange>? validator,
       this.initialValue,
       bool autoValidate = false,
       this.dateFormat,
       InputDecoration decoration = const InputDecoration()})
-      : assert(context != null),
-        assert(autoValidate != null),
-        assert(enabled != null),
-        super(
+      : super(
             validator: validator,
             onSaved: onSaved,
             enabled: enabled,
             initialValue: initialValue,
             builder: (FormFieldState<DateTimeRange> state) {
               final DateFormat format =
-                  (dateFormat ?? DateFormat('MM-dd-yyyy'));
-              final InputDecoration inputDecoration = (decoration ??
-                      const InputDecoration())
+                  (dateFormat ?? DateFormat('MM/dd/yyyy'));
+              final InputDecoration inputDecoration = decoration
                   .copyWith(enabled: enabled)
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
+              if (state.value == null) {
+                state.didChange(DateTimeRange(
+                    start: firstDate ?? DateTime.now(),
+                    end: lastDate ?? DateTime(DateTime.now().year + 5)));
+              }
 
               /// This is the dialog to select the date range.
               Future<Null> selectDateRange(BuildContext context) async {
-                DateTimeRange picked = await showDateRangePicker(
-                    context: context,
-                    initialDateRange: initialValue,
-                    firstDate: firstDate ?? DateTime.now(),
-                    lastDate: lastDate ?? DateTime(DateTime.now().year + 5),
-                    helpText: helpText ?? 'Select Date Range',
-                    cancelText: cancelText ?? 'CANCEL',
-                    confirmText: confirmText ?? 'OK',
-                    saveText: saveText ?? 'SAVE',
-                    errorFormatText: errorFormatText ?? 'Invalid format.',
-                    errorInvalidText: errorInvalidText ?? 'Out of range.',
-                    errorInvalidRangeText:
-                        errorInvalidRangeText ?? 'Invalid range.',
-                    fieldStartHintText: fieldStartLabelText ?? 'Start Date',
-                    fieldEndLabelText: fieldEndLabelText ?? 'End Date');
-                if (picked != null) {
+                DateTimeRange? picked = await showDateRangePicker(
+                        context: context,
+                        initialDateRange: initialValue,
+                        firstDate: firstDate ?? DateTime.now(),
+                        lastDate: lastDate ?? DateTime(DateTime.now().year + 5),
+                        helpText: helpText ?? 'Select Date Range',
+                        cancelText: cancelText ?? 'CANCEL',
+                        confirmText: confirmText ?? 'OK',
+                        saveText: saveText ?? 'SAVE',
+                        errorFormatText: errorFormatText ?? 'Invalid format.',
+                        errorInvalidText: errorInvalidText ?? 'Out of range.',
+                        errorInvalidRangeText:
+                            errorInvalidRangeText ?? 'Invalid range.',
+                        fieldStartHintText: fieldStartLabelText ?? 'Start Date',
+                        fieldEndLabelText: fieldEndLabelText ?? 'End Date') ??
+                    state.value;
+                if (picked != state.value) {
                   state.didChange(picked);
-                  state.save();
                 }
               }
 
@@ -104,7 +106,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                               :
 
                               /// This displays the selected date range when the dialog is closed.
-                              '${format.format(state.value.start)} - ${format.format(state.value.end)}',
+                              '${format.format(state.value!.start)} - ${format.format(state.value!.end)}',
                           style: TextStyle(
                               color: enabled
                                   ? null
@@ -116,33 +118,33 @@ class DateRangeField extends FormField<DateTimeRange> {
   /// This is the earliest date a user can select.
   ///
   /// If null, this will default to DateTime.now().
-  final DateTime firstDate;
+  final DateTime? firstDate;
 
   /// This is the latest date a user can select.
   ///
   /// If null, this will default to 5 years from now.
-  final DateTime lastDate;
+  final DateTime? lastDate;
 
   /// currentDate represents the the current day (today).
   ///
   /// If null, this default to DateTime.now().
-  final DateTime currentDate;
+  final DateTime? currentDate;
 
   /// This argument determines which mode the showDateRangePicker will initially display in.
   ///
   /// It defaults to a scrollable calendar month grid ([DatePickerEntryMode.calendar]).
   /// It can also be set to display two text input fields ([DatePickerEntryMode.input]).
-  final DatePickerEntryMode initialEntryMode;
+  final DatePickerEntryMode? initialEntryMode;
 
   /// This is the label displayed at the top of the [showDateRangePicker] dialog.
   ///
   /// If null, this defaults to 'Select Date Range'.
-  final String helpText;
+  final String? helpText;
 
   /// This is the label on the cancel button for the text input mode.
   ///
   /// If null, this defaults to 'CANCEL'.
-  final String cancelText;
+  final String? cancelText;
 
   /// Whether input should be enabled.
   ///
@@ -152,59 +154,59 @@ class DateRangeField extends FormField<DateTimeRange> {
   /// This is the label on the ok button for the text input mode.
   ///
   /// If null, this defaults to 'OK'.
-  final String confirmText;
+  final String? confirmText;
 
   /// This is the label on the save button for the calendar view.
   ///
   /// If null, this defaults to 'SAVE'.
-  final String saveText;
+  final String? saveText;
 
   /// This is the error message displayed when the input text is not a proper date format.
   ///
   /// For example, if the date format was 'MM-dd-yyyy', and the user enters 'Monday' this message will be displayed.
   /// If null, this defaults to 'Invalid format.'.
-  final String errorFormatText;
+  final String? errorFormatText;
 
   /// This is the error message displayed when an input is not a selectable date.
   ///
   /// For example, if firstDate was set to 09-01-2020, and the user enters '09-01-2019' this message will be displayed.
   /// If null, this defaults to 'Out of range.'.
-  final String errorInvalidText;
+  final String? errorInvalidText;
 
   /// This is the error message displayed when an input is not a valid date range.
   ///
   /// For example, if the user selects a startDate after the endDate this message will be displayed.
   /// If null, this defaults to 'Invalid range.'.
-  final String errorInvalidRangeText;
+  final String? errorInvalidRangeText;
 
   /// This is the label for the start date input text field.
   ///
   /// If null, this defaults to 'Start Date'.
-  final String fieldStartLabelText;
+  final String? fieldStartLabelText;
 
   /// This is the label for the end date input text field.
   ///
   /// If null, this default to 'End Date'.
-  final String fieldEndLabelText;
+  final String? fieldEndLabelText;
 
   /// This is the width of the widget.
   ///
   /// If null, this defaults to the width of the screen.
-  final double width;
+  final double? width;
 
   /// This is the margins of the widget.
   ///
   /// If null, this defaults to EdgeInsets.all(15.0).
-  final EdgeInsets margin;
+  final EdgeInsets? margin;
 
   /// This required field is the initial DateTimeRange value of the widget.
   ///
   /// This value will be displayed upon first opening the dialog, and if the user does not choose another value it will be saved when the onSaved method is called.
-  final DateTimeRange initialValue;
+  final DateTimeRange? initialValue;
 
   /// This is the format the widget will use for dates.
   ///
   /// Any valid format from the intl package is usable.
-  /// If null, this will default to 'MM-dd-yyyy'.
-  final DateFormat dateFormat;
+  /// If null, this will default to 'MM/dd/yyyy'.
+  final DateFormat? dateFormat;
 }

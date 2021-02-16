@@ -18,3 +18,7 @@
 
 * Merged Pull Request adding null initialDateRange, and an enabled option
 
+## 1.0.0-nullsafety.1
+
+* Migrated package to null safety, made small change to the default date format.
+

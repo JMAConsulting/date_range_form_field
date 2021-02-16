@@ -1,16 +1,16 @@
 name: date_range_form_field
 description: A Flutter package to create a widget which allows the user to use a date picker to input a DateRange into a FormField using showDateRangePicker.
-version: 0.0.6
+version: 1.0.0-nullsafety.1
 homepage: https://github.com/JMAConsulting/date_range_form_field
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0 <2.0.0"
+  sdk: '>=2.12.0-259.9.beta <3.0.0'
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.16.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

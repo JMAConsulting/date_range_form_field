@@ -19,14 +19,14 @@ class MyFormField extends StatefulWidget {
   _MyFormFieldState createState() => _MyFormFieldState();
 }
 
-GlobalKey myFormKey = new GlobalKey();
+GlobalKey<FormState> myFormKey = new GlobalKey();
 
 class _MyFormFieldState extends State<MyFormField> {
-  DateTimeRange myDateRange;
+  DateTimeRange? myDateRange;
 
   void _submitForm() {
-    final FormState form = myFormKey.currentState;
-    form.save();
+    final FormState? form = myFormKey.currentState;
+    form!.save();
   }
 
   @override
@@ -43,7 +43,7 @@ class _MyFormFieldState extends State<MyFormField> {
               SafeArea(
                 child: DateRangeField(
                     context: context,
-                    enabled: false,
+                    enabled: true,
                     decoration: InputDecoration(
                       labelText: 'Date Range',
                       prefixIcon: Icon(Icons.date_range),
@@ -55,18 +55,18 @@ class _MyFormFieldState extends State<MyFormField> {
                     //   end: DateTime.now(),
                     // ),
                     validator: (value) {
-                      if (value.start.isBefore(DateTime.now())) {
+                      if (value!.start.isBefore(DateTime.now())) {
                         return 'Please enter a later start date';
                       }
                       return null;
                     },
                     onSaved: (value) {
                       setState(() {
-                        myDateRange = value;
+                        myDateRange = value!;
                       });
                     }),
               ),
-              FlatButton(
+              ElevatedButton(
                 child: Text('Submit'),
                 onPressed: _submitForm,
               ),
