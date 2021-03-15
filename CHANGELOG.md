@@ -25,3 +25,11 @@
 ## 1.0.0-nullsafety.2
 
 * Updated example to include null safe code.
+
+## 1.0.0-nullsafety.3
+
+* Updated documentation for null safety
+
+## 1.0.0
+
+* Migrated to stable null safety

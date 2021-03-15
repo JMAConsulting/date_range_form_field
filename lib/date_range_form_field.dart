@@ -58,11 +58,11 @@ class DateRangeField extends FormField<DateTimeRange> {
               final InputDecoration inputDecoration = decoration
                   .copyWith(enabled: enabled)
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
-              if (state.value == null) {
-                state.didChange(DateTimeRange(
-                    start: firstDate ?? DateTime.now(),
-                    end: lastDate ?? DateTime(DateTime.now().year + 5)));
-              }
+              // if (state.value == null) {
+              //   state.didChange(DateTimeRange(
+              //       start: firstDate ?? DateTime.now(),
+              //       end: lastDate ?? DateTime(DateTime.now().year + 5)));
+              // }
 
               /// This is the dialog to select the date range.
               Future<Null> selectDateRange(BuildContext context) async {

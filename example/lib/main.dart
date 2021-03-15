@@ -44,6 +44,10 @@ class _MyFormFieldState extends State<MyFormField> {
                 child: DateRangeField(
                     context: context,
                     enabled: true,
+                    initialValue: DateTimeRange(
+                        start: DateTime.now(),
+                        end: DateTime(DateTime.now().year, DateTime.now().month,
+                            DateTime.now().day + 5)),
                     decoration: InputDecoration(
                       labelText: 'Date Range',
                       prefixIcon: Icon(Icons.date_range),
