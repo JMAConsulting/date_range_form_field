@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:date_range_form_field/date_range_form_field.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(new MyApp());
@@ -42,12 +42,10 @@ class _MyFormFieldState extends State<MyFormField> {
             children: [
               SafeArea(
                 child: DateRangeField(
-                    context: context,
                     enabled: true,
                     initialValue: DateTimeRange(
                         start: DateTime.now(),
-                        end: DateTime(DateTime.now().year, DateTime.now().month,
-                            DateTime.now().day + 5)),
+                        end: DateTime.now().add(Duration(days: 5))),
                     decoration: InputDecoration(
                       labelText: 'Date Range',
                       prefixIcon: Icon(Icons.date_range),

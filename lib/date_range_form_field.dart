@@ -2,8 +2,9 @@
 // Use of this source code is governed by a BSD-style license which can be
 // found in the LICENSE file.
 
-import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 /// A [DateRangeField] which extends a [FormField].
@@ -24,7 +25,6 @@ class DateRangeField extends FormField<DateTimeRange> {
 
   DateRangeField(
       {Key? key,
-      required BuildContext context,
       this.firstDate,
       this.lastDate,
       this.currentDate,
@@ -41,6 +41,7 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.fieldEndLabelText,
       this.width,
       this.margin,
+      ValueChanged<DateTimeRange?>? onChanged,
       FormFieldSetter<DateTimeRange>? onSaved,
       FormFieldValidator<DateTimeRange>? validator,
       this.initialValue,
@@ -65,9 +66,9 @@ class DateRangeField extends FormField<DateTimeRange> {
               // }
 
               /// This is the dialog to select the date range.
-              Future<Null> selectDateRange(BuildContext context) async {
+              Future<Null> selectDateRange() async {
                 DateTimeRange? picked = await showDateRangePicker(
-                        context: context,
+                        context: state.context,
                         initialDateRange: initialValue,
                         firstDate: firstDate ?? DateTime.now(),
                         lastDate: lastDate ?? DateTime(DateTime.now().year + 5),
@@ -84,19 +85,16 @@ class DateRangeField extends FormField<DateTimeRange> {
                     state.value;
                 if (picked != state.value) {
                   state.didChange(picked);
+                  onChanged?.call(picked);
                 }
               }
 
               return InkWell(
                 /// This calls the dialog to select the date range.
-                onTap: enabled
-                    ? () {
-                        selectDateRange(context);
-                      }
-                    : null,
+                onTap: enabled ? selectDateRange : null,
                 child: Container(
                     margin: margin ?? EdgeInsets.all(15.0),
-                    width: width ?? MediaQuery.of(context).size.width,
+                    width: width ?? MediaQuery.of(state.context).size.width,
                     child: InputDecorator(
                       decoration:
                           inputDecoration.copyWith(errorText: state.errorText),
@@ -110,7 +108,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                           style: TextStyle(
                               color: enabled
                                   ? null
-                                  : Theme.of(context).disabledColor)),
+                                  : Theme.of(state.context).disabledColor)),
                     )),
               );
             });
