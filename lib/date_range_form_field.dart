@@ -58,10 +58,10 @@ class DateRangeField extends FormField<DateTimeRange> {
               final InputDecoration inputDecoration = decoration
                   .copyWith(enabled: enabled)
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
-              if (state.value == null && firstDate != null && lastDate != null) {
+              if (state.value == null && initialValue != null) {
                 state.setValue(DateTimeRange(
-                    start: firstDate,
-                    end: lastDate));
+                    start: initialValue.start,
+                    end: initialValue.end));
               }
 
               /// This is the dialog to select the date range.
