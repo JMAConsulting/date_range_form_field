@@ -6,9 +6,8 @@ Additionally, the widget will accept a date format, defaulting to MM-dd-yyyy.
 
 # Example
 ``` dart
-// Import package
-import 'package:flutter/material.dart';
 import 'package:date_range_form_field/date_range_form_field.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(new MyApp());
@@ -51,18 +50,16 @@ class _MyFormFieldState extends State<MyFormField> {
             children: [
               SafeArea(
                 child: DateRangeField(
-                    context: context,
                     enabled: true,
+                    initialValue: DateTimeRange(
+                        start: DateTime.now(),
+                        end: DateTime.now().add(Duration(days: 5))),
                     decoration: InputDecoration(
                       labelText: 'Date Range',
                       prefixIcon: Icon(Icons.date_range),
                       hintText: 'Please select a start and end date',
                       border: OutlineInputBorder(),
                     ),
-                    // initialValue: DateTimeRange(
-                    //   start: DateTime.now(),
-                    //   end: DateTime.now(),
-                    // ),
                     validator: (value) {
                       if (value!.start.isBefore(DateTime.now())) {
                         return 'Please enter a later start date';

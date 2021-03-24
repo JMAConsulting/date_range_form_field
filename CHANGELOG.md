@@ -33,3 +33,7 @@
 ## 1.0.0
 
 * Migrated to stable null safety
+
+## 1.0.1
+
+* Updated widget to not require external context.

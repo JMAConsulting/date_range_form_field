@@ -52,10 +52,6 @@ class _MyFormFieldState extends State<MyFormField> {
                       hintText: 'Please select a start and end date',
                       border: OutlineInputBorder(),
                     ),
-                    // initialValue: DateTimeRange(
-                    //   start: DateTime.now(),
-                    //   end: DateTime.now(),
-                    // ),
                     validator: (value) {
                       if (value!.start.isBefore(DateTime.now())) {
                         return 'Please enter a later start date';

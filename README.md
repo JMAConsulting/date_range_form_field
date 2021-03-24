@@ -16,8 +16,8 @@ This widget must have a MaterialWidget ancestor, such as a MaterialApp
 <img src="https://user-images.githubusercontent.com/65566908/91237186-f0440b80-e707-11ea-919f-846d0c6504c4.gif" height="500"/>
 
 ``` dart
-import 'package:flutter/material.dart';
 import 'package:date_range_form_field/date_range_form_field.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(new MyApp());
@@ -60,22 +60,16 @@ class _MyFormFieldState extends State<MyFormField> {
             children: [
               SafeArea(
                 child: DateRangeField(
-                    context: context,
                     enabled: true,
                     initialValue: DateTimeRange(
                         start: DateTime.now(),
-                        end: DateTime(DateTime.now().year, DateTime.now().month,
-                            DateTime.now().day + 5)),
+                        end: DateTime.now().add(Duration(days: 5))),
                     decoration: InputDecoration(
                       labelText: 'Date Range',
                       prefixIcon: Icon(Icons.date_range),
                       hintText: 'Please select a start and end date',
                       border: OutlineInputBorder(),
                     ),
-                    // initialValue: DateTimeRange(
-                    //   start: DateTime.now(),
-                    //   end: DateTime.now(),
-                    // ),
                     validator: (value) {
                       if (value!.start.isBefore(DateTime.now())) {
                         return 'Please enter a later start date';
