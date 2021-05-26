@@ -59,11 +59,6 @@ class DateRangeField extends FormField<DateTimeRange> {
               final InputDecoration inputDecoration = decoration
                   .copyWith(enabled: enabled)
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
-              // if (state.value == null) {
-              //   state.didChange(DateTimeRange(
-              //       start: firstDate ?? DateTime.now(),
-              //       end: lastDate ?? DateTime(DateTime.now().year + 5)));
-              // }
 
               /// This is the dialog to select the date range.
               Future<Null> selectDateRange() async {
@@ -88,7 +83,8 @@ class DateRangeField extends FormField<DateTimeRange> {
                   onChanged?.call(picked);
                 }
               }
-
+              // This will display hintText if provided and if state.value is null
+              String hintText = decoration.hintText ?? '';
               return InkWell(
                 /// This calls the dialog to select the date range.
                 onTap: enabled ? selectDateRange : null,
@@ -100,16 +96,17 @@ class DateRangeField extends FormField<DateTimeRange> {
                           inputDecoration.copyWith(errorText: state.errorText),
                       child: Text(
                           state.value == null
-                              ? ''
+                              ? hintText
                               :
 
                               /// This displays the selected date range when the dialog is closed.
                               '${format.format(state.value!.start)} - ${format.format(state.value!.end)}',
-                          style: TextStyle(
+                          style: (state.value == null && hintText != '' && decoration.hintStyle != null) ? decoration.hintStyle : TextStyle(
                               color: enabled
                                   ? null
                                   : Theme.of(state.context).disabledColor)),
-                    )),
+                    ),
+                ),
               );
             });
 
