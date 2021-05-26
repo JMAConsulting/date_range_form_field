@@ -42,7 +42,7 @@ class _MyFormFieldState extends State<MyFormField> {
             children: [
               SafeArea(
                 child: DateRangeField(
-                  firstDate: DateTime(1990),
+                    firstDate: DateTime(1990),
                     enabled: true,
                     initialValue: DateTimeRange(
                         start: DateTime.now(),

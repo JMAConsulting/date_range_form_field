@@ -37,3 +37,7 @@
 ## 1.0.1
 
 * Updated widget to not require external context.
+
+## 1.0.2
+
+* Fixed problems with displaying hintText, and added support for fieldStartHintText and fieldEndHintText

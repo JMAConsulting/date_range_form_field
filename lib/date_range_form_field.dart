@@ -37,8 +37,8 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.errorFormatText,
       this.errorInvalidText,
       this.errorInvalidRangeText,
-        this.fieldStartHintText,
-        this.fieldEndHintText,
+      this.fieldStartHintText,
+      this.fieldEndHintText,
       this.fieldStartLabelText,
       this.fieldEndLabelText,
       this.width,
@@ -80,37 +80,41 @@ class DateRangeField extends FormField<DateTimeRange> {
                         fieldStartHintText: fieldStartHintText ?? 'Start Date',
                         fieldEndHintText: fieldEndHintText ?? 'End Date',
                         fieldStartLabelText: fieldStartLabelText ?? 'End Date',
-                        fieldEndLabelText: fieldEndLabelText ?? 'End Date'
-                ) ??
+                        fieldEndLabelText: fieldEndLabelText ?? 'End Date') ??
                     state.value;
                 if (picked != state.value) {
                   state.didChange(picked);
                   onChanged?.call(picked);
                 }
               }
+
               String hintText = decoration.hintText ?? '';
               return InkWell(
                 /// This calls the dialog to select the date range.
                 onTap: enabled ? selectDateRange : null,
                 child: Container(
-                    margin: margin ?? EdgeInsets.all(15.0),
-                    width: width ?? MediaQuery.of(state.context).size.width,
-                    child: InputDecorator(
-                      decoration:
-                          inputDecoration.copyWith(errorText: state.errorText),
-                      child: Text(
+                  margin: margin ?? EdgeInsets.all(15.0),
+                  width: width ?? MediaQuery.of(state.context).size.width,
+                  child: InputDecorator(
+                    decoration:
+                        inputDecoration.copyWith(errorText: state.errorText),
+                    child: Text(
                         // This will display hintText if provided and if state.value is null
-                          state.value == null
-                              ? hintText
-                              :
+                        state.value == null
+                            ? hintText
+                            :
 
-                              /// This displays the selected date range when the dialog is closed.
-                              '${format.format(state.value!.start)} - ${format.format(state.value!.end)}',
-                          style: (state.value == null && hintText != '' && decoration.hintStyle != null) ? decoration.hintStyle : TextStyle(
-                              color: enabled
-                                  ? null
-                                  : Theme.of(state.context).disabledColor)),
-                    ),
+                            /// This displays the selected date range when the dialog is closed.
+                            '${format.format(state.value!.start)} - ${format.format(state.value!.end)}',
+                        style: (state.value == null &&
+                                hintText != '' &&
+                                decoration.hintStyle != null)
+                            ? decoration.hintStyle
+                            : TextStyle(
+                                color: enabled
+                                    ? null
+                                    : Theme.of(state.context).disabledColor)),
+                  ),
                 ),
               );
             });
