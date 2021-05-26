@@ -37,6 +37,8 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.errorFormatText,
       this.errorInvalidText,
       this.errorInvalidRangeText,
+        this.fieldStartHintText,
+        this.fieldEndHintText,
       this.fieldStartLabelText,
       this.fieldEndLabelText,
       this.width,
@@ -59,11 +61,6 @@ class DateRangeField extends FormField<DateTimeRange> {
               final InputDecoration inputDecoration = decoration
                   .copyWith(enabled: enabled)
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
-              // if (state.value == null) {
-              //   state.didChange(DateTimeRange(
-              //       start: firstDate ?? DateTime.now(),
-              //       end: lastDate ?? DateTime(DateTime.now().year + 5)));
-              // }
 
               /// This is the dialog to select the date range.
               Future<Null> selectDateRange() async {
@@ -80,15 +77,18 @@ class DateRangeField extends FormField<DateTimeRange> {
                         errorInvalidText: errorInvalidText ?? 'Out of range.',
                         errorInvalidRangeText:
                             errorInvalidRangeText ?? 'Invalid range.',
-                        fieldStartHintText: fieldStartLabelText ?? 'Start Date',
-                        fieldEndLabelText: fieldEndLabelText ?? 'End Date') ??
+                        fieldStartHintText: fieldStartHintText ?? 'Start Date',
+                        fieldEndHintText: fieldEndHintText ?? 'End Date',
+                        fieldStartLabelText: fieldStartLabelText ?? 'End Date',
+                        fieldEndLabelText: fieldEndLabelText ?? 'End Date'
+                ) ??
                     state.value;
                 if (picked != state.value) {
                   state.didChange(picked);
                   onChanged?.call(picked);
                 }
               }
-
+              String hintText = decoration.hintText ?? '';
               return InkWell(
                 /// This calls the dialog to select the date range.
                 onTap: enabled ? selectDateRange : null,
@@ -99,17 +99,19 @@ class DateRangeField extends FormField<DateTimeRange> {
                       decoration:
                           inputDecoration.copyWith(errorText: state.errorText),
                       child: Text(
+                        // This will display hintText if provided and if state.value is null
                           state.value == null
-                              ? ''
+                              ? hintText
                               :
 
                               /// This displays the selected date range when the dialog is closed.
                               '${format.format(state.value!.start)} - ${format.format(state.value!.end)}',
-                          style: TextStyle(
+                          style: (state.value == null && hintText != '' && decoration.hintStyle != null) ? decoration.hintStyle : TextStyle(
                               color: enabled
                                   ? null
                                   : Theme.of(state.context).disabledColor)),
-                    )),
+                    ),
+                ),
               );
             });
 
@@ -176,6 +178,16 @@ class DateRangeField extends FormField<DateTimeRange> {
   /// For example, if the user selects a startDate after the endDate this message will be displayed.
   /// If null, this defaults to 'Invalid range.'.
   final String? errorInvalidRangeText;
+
+  /// This is the text used to prompt the user when no text has been entered in the start field.
+  ///
+  /// If null, this defaults to 'Start Date'.
+  final String? fieldStartHintText;
+
+  /// This is the text used to prompt the user when no text has been entered in the end field.
+  ///
+  /// If null, this defaults to 'End Date'.
+  final String? fieldEndHintText;
 
   /// This is the label for the start date input text field.
   ///
