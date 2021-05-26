@@ -88,7 +88,6 @@ class DateRangeField extends FormField<DateTimeRange> {
                   onChanged?.call(picked);
                 }
               }
-              // This will display hintText if provided and if state.value is null
               String hintText = decoration.hintText ?? '';
               return InkWell(
                 /// This calls the dialog to select the date range.
@@ -100,6 +99,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                       decoration:
                           inputDecoration.copyWith(errorText: state.errorText),
                       child: Text(
+                        // This will display hintText if provided and if state.value is null
                           state.value == null
                               ? hintText
                               :
