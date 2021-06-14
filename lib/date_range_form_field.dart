@@ -79,7 +79,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                             errorInvalidRangeText ?? 'Invalid range.',
                         fieldStartHintText: fieldStartHintText ?? 'Start Date',
                         fieldEndHintText: fieldEndHintText ?? 'End Date',
-                        fieldStartLabelText: fieldStartLabelText ?? 'End Date',
+                        fieldStartLabelText: fieldStartLabelText ?? 'Start Date',
                         fieldEndLabelText: fieldEndLabelText ?? 'End Date') ??
                     state.value;
                 if (picked != state.value) {
