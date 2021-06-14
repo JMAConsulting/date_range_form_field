@@ -222,7 +222,7 @@ class DateRangeField extends FormField<DateTimeRange> {
   /// If null, this will default to 'MM/dd/yyyy'.
   final DateFormat? dateFormat;
 
-  /// This is the text style of the field when the hint text is equal to [null].
+  /// This text style will be used when both the hint text and the hint style are equals to [null] and a [DateTimeRange] is selected.
   ///
   /// If null, this will default to ([DefaultTextStyle]).
   final TextStyle? textStyle;
