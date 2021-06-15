@@ -49,6 +49,7 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.initialValue,
       bool autoValidate = false,
       this.dateFormat,
+      this.textStyle,
       InputDecoration decoration = const InputDecoration()})
       : super(
             validator: validator,
@@ -110,10 +111,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                                 hintText != '' &&
                                 decoration.hintStyle != null)
                             ? decoration.hintStyle
-                            : TextStyle(
-                                color: enabled
-                                    ? null
-                                    : Theme.of(state.context).disabledColor)),
+                            : textStyle),
                   ),
                 ),
               );
@@ -223,4 +221,10 @@ class DateRangeField extends FormField<DateTimeRange> {
   /// Any valid format from the intl package is usable.
   /// If null, this will default to 'MM/dd/yyyy'.
   final DateFormat? dateFormat;
+
+  /// This is the default [TextStyle] of the field.
+  ///
+  /// If a hintStyle is provided in the decoration, then the hintStyle will be applied when the hintText is displayed.
+  /// If null, this will default to ([DefaultTextStyle])
+  final TextStyle? textStyle;
 }
