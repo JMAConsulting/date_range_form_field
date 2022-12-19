@@ -52,6 +52,7 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.textStyle,
       InputDecoration decoration = const InputDecoration()})
       : super(
+            key: key,
             validator: validator,
             onSaved: onSaved,
             enabled: enabled,
