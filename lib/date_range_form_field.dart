@@ -52,6 +52,7 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.textStyle,
       InputDecoration decoration = const InputDecoration()})
       : super(
+            key: key,
             validator: validator,
             onSaved: onSaved,
             enabled: enabled,
@@ -62,6 +63,11 @@ class DateRangeField extends FormField<DateTimeRange> {
               final InputDecoration inputDecoration = decoration
                   .copyWith(enabled: enabled)
                   .applyDefaults(Theme.of(state.context).inputDecorationTheme);
+              if (state.value == null && initialValue != null) {
+                state.setValue(DateTimeRange(
+                    start: initialValue.start,
+                    end: initialValue.end));
+              }
 
               /// This is the dialog to select the date range.
               Future<Null> selectDateRange() async {
@@ -69,7 +75,7 @@ class DateRangeField extends FormField<DateTimeRange> {
                         context: state.context,
                         initialDateRange: initialValue,
                         firstDate: firstDate ?? DateTime.now(),
-                        lastDate: lastDate ?? DateTime(DateTime.now().year + 5),
+                        lastDate: lastDate ?? DateTime.now().add(Duration(days: 5)),
                         helpText: helpText ?? 'Select Date Range',
                         cancelText: cancelText ?? 'CANCEL',
                         confirmText: confirmText ?? 'OK',
