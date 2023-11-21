@@ -52,6 +52,7 @@ class DateRangeField extends FormField<DateTimeRange> {
       this.textStyle,
       InputDecoration decoration = const InputDecoration()})
       : super(
+            key: key,
             validator: validator,
             onSaved: onSaved,
             enabled: enabled,
@@ -80,7 +81,8 @@ class DateRangeField extends FormField<DateTimeRange> {
                             errorInvalidRangeText ?? 'Invalid range.',
                         fieldStartHintText: fieldStartHintText ?? 'Start Date',
                         fieldEndHintText: fieldEndHintText ?? 'End Date',
-                        fieldStartLabelText: fieldStartLabelText ?? 'Start Date',
+                        fieldStartLabelText:
+                            fieldStartLabelText ?? 'Start Date',
                         fieldEndLabelText: fieldEndLabelText ?? 'End Date') ??
                     state.value;
                 if (picked != state.value) {
